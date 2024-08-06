@@ -1,5 +1,3 @@
-"use client";
-
 import Categories from "./components/categories";
 import PromotionalBanner from "./components/promotional-banner";
 
