@@ -14,7 +14,7 @@ const PromotionalBanner = ({
       src={imagePath}
       width={0}
       height={0}
-      className="h-auto w-full"
+      className="h-auto w-full px-5"
       sizes="100vw"
       alt={imageDescription}
     />
