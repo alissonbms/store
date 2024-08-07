@@ -13,6 +13,7 @@ import { Button } from "./button";
 import { Card } from "./card";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -22,6 +23,7 @@ import ModeToggle from "./mode-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
+import Link from "next/link";
 
 const Header = () => {
   const { status, data } = useSession();
@@ -87,13 +89,17 @@ const Header = () => {
                   )
                 )}
 
-                <Button
-                  variant="outline"
-                  className="w-full justify-start gap-2"
-                >
-                  <HomeIcon size={18} />
-                  Início
-                </Button>
+                <SheetClose asChild>
+                  <Link href="/">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start gap-2"
+                    >
+                      <HomeIcon size={18} />
+                      Início
+                    </Button>
+                  </Link>
+                </SheetClose>
 
                 <Button
                   variant="outline"
@@ -103,13 +109,17 @@ const Header = () => {
                   Ofertas
                 </Button>
 
-                <Button
-                  variant="outline"
-                  className="w-full justify-start gap-2"
-                >
-                  <ListOrderedIcon size={18} />
-                  Catálogo
-                </Button>
+                <SheetClose asChild>
+                  <Link href="/catalog">
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start gap-2"
+                    >
+                      <ListOrderedIcon size={18} />
+                      Catálogo
+                    </Button>
+                  </Link>
+                </SheetClose>
 
                 <ModeToggle />
               </div>
@@ -122,7 +132,9 @@ const Header = () => {
       </div>
 
       <h1 className="text-lg font-semibold">
-        <span className="text-primary">Valeryian</span> Store
+        <Link href="/">
+          <span className="text-primary">Valeryian</span> Store
+        </Link>
       </h1>
 
       <Button size="icon" variant="outline">
