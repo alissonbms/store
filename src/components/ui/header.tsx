@@ -131,11 +131,11 @@ const Header = () => {
         </div>
       </div>
 
-      <h1 className="text-lg font-semibold">
-        <Link href="/">
+      <Link href="/">
+        <h1 className="text-lg font-semibold">
           <span className="text-primary">Valeryian</span> Store
-        </Link>
-      </h1>
+        </h1>
+      </Link>
 
       <Button size="icon" variant="outline">
         <ShoppingCartIcon />
