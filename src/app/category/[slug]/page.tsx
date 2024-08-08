@@ -31,7 +31,10 @@ const CategoryProducts = async ({ params }: { params: { slug: string } }) => {
         {category.products.map((product) => (
           <ProductItem
             key={product.id}
-            product={computeProductTotalPrice(product)}
+            product={{
+              ...product,
+              totalPrice: computeProductTotalPrice(product),
+            }}
           />
         ))}
       </div>
