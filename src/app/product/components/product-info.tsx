@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ProductWithTotalPrice } from "@/helpers/product";
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -12,24 +11,20 @@ import {
 import { useState } from "react";
 
 interface ProductInfoProps {
-  product: Pick<
-    ProductWithTotalPrice,
-    "basePrice" | "name" | "description" | "discountPercentage" | "totalPrice"
-  >;
+  product: {
+    name: string;
+    description: string;
+    discountPercentage: number;
+    totalPrice: number;
+  };
+  basePrice: number;
 }
 
 const ProductInfo = ({
-  product: { basePrice, name, description, discountPercentage, totalPrice },
+  product: { name, description, discountPercentage, totalPrice },
+  basePrice,
 }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
-
-  const handleIncreaseQuantityClick = () => {
-    setQuantity((prevState) => prevState + 1);
-  };
-
-  const handleDecreaseQuantityClick = () => {
-    setQuantity((prevState) => (prevState === 1 ? 1 : prevState - 1));
-  };
 
   return (
     <div className="flex flex-col px-5">
@@ -54,13 +49,18 @@ const ProductInfo = ({
         <Button
           size="icon"
           variant={"outline"}
-          onClick={handleDecreaseQuantityClick}
+          onClick={() =>
+            setQuantity((prevState) => (prevState === 1 ? 1 : prevState - 1))
+          }
         >
           <ArrowLeftIcon size={16} />
         </Button>
         <span>{quantity}</span>
         <Button size="icon" variant={"outline"}>
-          <ArrowRightIcon size={16} onClick={handleIncreaseQuantityClick} />
+          <ArrowRightIcon
+            size={16}
+            onClick={() => setQuantity((prevState) => prevState + 1)}
+          />
         </Button>
       </div>
 
@@ -78,7 +78,7 @@ const ProductInfo = ({
           <TruckIcon />
           <div className="flex flex-col gap-1">
             <p className="text-sm">
-              Entega via <span className="font-bold">ValPacket®</span>
+              Entega via <span className="font-bold">FSPacket®</span>
             </p>
             <p className="text-sm text-primary">
               Envio para
