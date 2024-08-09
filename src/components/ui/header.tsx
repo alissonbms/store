@@ -15,6 +15,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -24,11 +25,15 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
 import Link from "next/link";
+import Cart from "./cart";
+import { useContext } from "react";
+import { CartContext } from "@/providers/cart";
 
 const Header = () => {
   const { status, data } = useSession();
   const handleLoginClick = async () => await signIn("google");
   const handleLogoutClick = async () => await signOut();
+  const { cartTotalQuantity } = useContext(CartContext);
 
   return (
     <Card className="flex items-center justify-between p-[1.875rem]">
@@ -137,9 +142,28 @@ const Header = () => {
         </h1>
       </Link>
 
-      <Button size="icon" variant="outline">
-        <ShoppingCartIcon />
-      </Button>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button size="icon" variant="outline">
+            <div className="relative">
+              <ShoppingCartIcon />
+              {cartTotalQuantity > 0 && (
+                <div className="absolute -left-2.5 -top-2 rounded-full bg-primary px-1 text-xs">
+                  {cartTotalQuantity}
+                </div>
+              )}
+            </div>
+          </Button>
+        </SheetTrigger>
+        <SheetHeader className="hidden">
+          <SheetDescription>Menu carrinho de compras</SheetDescription>
+          <SheetTitle>Menu carrinho de compras</SheetTitle>
+        </SheetHeader>
+
+        <SheetContent>
+          <Cart />
+        </SheetContent>
+      </Sheet>
     </Card>
   );
 };

@@ -42,12 +42,9 @@ const ProductDetailsPage = async ({
       <ProductImages name={product.name} imageUrls={product.imageUrls} />
       <ProductInfo
         product={{
-          name: product.name,
-          description: product.description,
-          discountPercentage: product.discountPercentage,
+          ...product,
           totalPrice: computeProductTotalPrice(product),
         }}
-        basePrice={Number(product.basePrice)}
       />
       <div className="my-5">
         <SectionTitle>Produtos Recomendados</SectionTitle>
