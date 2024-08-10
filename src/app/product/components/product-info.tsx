@@ -16,8 +16,16 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
   const { addProductToCart } = useContext(CartContext);
 
+  const handleDecreaseQuantityClick = () => {
+    setQuantity((prev) => (prev === 1 ? prev : prev - 1));
+  };
+
+  const handleIncreaseQuantityClick = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
   const handleAddProductToCartClick = (product: CartProduct) => {
-    addProductToCart(product);
+    addProductToCart({ ...product, quantity });
   };
 
   return (
@@ -46,18 +54,13 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <Button
           size="icon"
           variant={"outline"}
-          onClick={() =>
-            setQuantity((prevState) => (prevState === 1 ? 1 : prevState - 1))
-          }
+          onClick={handleDecreaseQuantityClick}
         >
           <ArrowLeftIcon size={16} />
         </Button>
         <span>{quantity}</span>
         <Button size="icon" variant={"outline"}>
-          <ArrowRightIcon
-            size={16}
-            onClick={() => setQuantity((prevState) => prevState + 1)}
-          />
+          <ArrowRightIcon size={16} onClick={handleIncreaseQuantityClick} />
         </Button>
       </div>
 
