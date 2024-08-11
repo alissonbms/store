@@ -24,7 +24,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     setQuantity((prev) => prev + 1);
   };
 
-  const handleAddProductToCartClick = (product: CartProduct) => {
+  const handleAddProductToCartClick = () => {
     addProductToCart({ ...product, quantity });
   };
 
@@ -59,8 +59,12 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           <ArrowLeftIcon size={16} />
         </Button>
         <span>{quantity}</span>
-        <Button size="icon" variant={"outline"}>
-          <ArrowRightIcon size={16} onClick={handleIncreaseQuantityClick} />
+        <Button
+          size="icon"
+          variant={"outline"}
+          onClick={handleIncreaseQuantityClick}
+        >
+          <ArrowRightIcon size={16} />
         </Button>
       </div>
 
@@ -71,7 +75,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
       <Button
         className="mt-8 font-bold uppercase"
-        onClick={() => handleAddProductToCartClick({ ...product, quantity })}
+        onClick={handleAddProductToCartClick}
       >
         Adicionar ao carrinho
       </Button>

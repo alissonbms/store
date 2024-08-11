@@ -14,6 +14,9 @@ interface ICartContext {
   cartTotalDiscount: number;
   cartTotalQuantity: number;
   addProductToCart: (product: CartProduct) => void;
+  increaseProductQuantity: (productId: string) => void;
+  decreaseProductQuantity: (productId: string) => void;
+  removeProductFromCart: (productId: string) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -23,6 +26,9 @@ export const CartContext = createContext<ICartContext>({
   cartTotalDiscount: 0,
   cartTotalQuantity: 0,
   addProductToCart: () => {},
+  increaseProductQuantity: () => {},
+  decreaseProductQuantity: () => {},
+  removeProductFromCart: () => {},
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -49,8 +55,54 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } else {
       setProducts((prevState) => [...prevState, product]);
     }
-
     setCartTotalQuantity((prevState) => prevState + product.quantity);
+  };
+
+  const increaseProductQuantity = (productId: string) => {
+    setProducts((prevState) =>
+      prevState.map((cartProduct) => {
+        if (cartProduct.id === productId) {
+          return { ...cartProduct, quantity: cartProduct.quantity + 1 };
+        }
+        return cartProduct;
+      }),
+    );
+
+    setCartTotalQuantity((prevState) => prevState + 1);
+  };
+
+  const decreaseProductQuantity = (productId: string) => {
+    setProducts((prevState) =>
+      prevState
+        .map((cartProduct) => {
+          if (cartProduct.id === productId) {
+            return {
+              ...cartProduct,
+              quantity: cartProduct.quantity - 1,
+            };
+          }
+          return cartProduct;
+        })
+        .filter((cartProduct) => cartProduct.quantity > 0),
+    );
+
+    setCartTotalQuantity((prevState) => prevState - 1);
+  };
+
+  const removeProductFromCart = (productId: string) => {
+    const product: CartProduct | undefined = products.find(
+      (cartProduct) => cartProduct.id === productId,
+    );
+
+    if (product) {
+      setCartTotalQuantity((prevState) => prevState - product.quantity);
+
+      setProducts((prevState) =>
+        prevState.filter((cartProduct) => cartProduct.id !== productId),
+      );
+    } else {
+      return null;
+    }
   };
 
   return (
@@ -62,6 +114,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         cartTotalDiscount: 0,
         cartTotalQuantity,
         addProductToCart,
+        increaseProductQuantity,
+        decreaseProductQuantity,
+        removeProductFromCart,
       }}
     >
       {children}
