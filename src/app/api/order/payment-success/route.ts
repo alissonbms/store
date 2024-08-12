@@ -28,7 +28,7 @@ export const POST = async (request: Request) => {
       },
     );
     const lineItems = sessionWithLineItems.line_items;
-
-    return NextResponse.json({ lineItems, received: true });
   }
+
+  return NextResponse.json({ received: true });
 };

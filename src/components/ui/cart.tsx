@@ -57,15 +57,15 @@ const Cart = () => {
           <div className="text-2xl">
             <CartDetails title={"Total:"} value={total} type="total" />
           </div>
+
+          <Button
+            className="mt-6 rounded-lg uppercase"
+            onClick={handleFinishPurchaseClick}
+          >
+            Finalizar compra
+          </Button>
         </div>
       )}
-
-      <Button
-        className="mt-6 rounded-lg uppercase"
-        onClick={handleFinishPurchaseClick}
-      >
-        Finalizar compra
-      </Button>
     </div>
   );
 };
