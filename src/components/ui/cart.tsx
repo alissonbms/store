@@ -3,13 +3,15 @@ import { useContext } from "react";
 import { CartContext } from "@/providers/cart";
 import { ShoppingCartIcon } from "lucide-react";
 import CartItem from "./cart-item";
-import { EmptyCart } from "../empty-cart";
+import { EmptyCart } from "./empty-cart";
 import CartDetails from "./details-cart";
+import { ScrollArea } from "./scroll-area";
+import { Button } from "./button";
 
 const Cart = () => {
   const { products, subTotal, total, totalDiscount } = useContext(CartContext);
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex h-full flex-col gap-8">
       <Badge
         variant="outline"
         className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem]"
@@ -18,15 +20,17 @@ const Cart = () => {
         Carrinho
       </Badge>
 
-      <div className="flex flex-col gap-8">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <CartItem key={product.id} product={product} />
-          ))
-        ) : (
-          <EmptyCart />
-        )}
-      </div>
+      <ScrollArea className="h-full">
+        <div className="flex h-full flex-col gap-8">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <CartItem key={product.id} product={product} />
+            ))
+          ) : (
+            <EmptyCart />
+          )}
+        </div>
+      </ScrollArea>
 
       {products.length > 0 && (
         <div className="flex flex-col gap-3">
@@ -42,6 +46,8 @@ const Cart = () => {
           </div>
         </div>
       )}
+
+      <Button className="mt-6 rounded-lg uppercase">Finalizar compra</Button>
     </div>
   );
 };

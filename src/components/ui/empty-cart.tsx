@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { SheetClose } from "./ui/sheet";
+import { Badge } from "./badge";
+import { SheetClose } from "./sheet";
 
 export const EmptyCart = () => {
   return (
-    <div className="flex h-[80vh] flex-col items-center justify-center gap-8">
-      <h4 className="text-2xl">Carrinho Vazio (0)</h4>
+    <div className="flex h-full flex-col items-center justify-center gap-8">
+      <p className="text-2xl">Carrinho vazio (0)</p>
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="text-center">
           Dê uma olhada nas nossas{" "}
@@ -28,7 +28,7 @@ export const EmptyCart = () => {
         variant="outline"
         className="font-primary rounded-lg py-3 text-center text-base font-normal"
       >
-        Faça um upgrade no seu setup, aqui você encontra desconto de até 55%
+        Faça um upgrade no seu setup, aqui você encontra descontos de até 55%
       </Badge>
     </div>
   );

@@ -32,7 +32,7 @@ const CartItem = ({ product }: CartItemProps) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="flex h-[77px] w-[77px] items-center justify-center bg-accent">
+        <div className="flex min-h-[5.625rem] w-[77px] items-center justify-center bg-accent">
           <Image
             src={product.imageUrls[0]}
             alt={product.name}
@@ -43,8 +43,8 @@ const CartItem = ({ product }: CartItemProps) => {
           />
         </div>
         <div className="flex flex-col">
-          <p className="text-xs"> {product.name}</p>
-          <div className="flex items-center gap-2">
+          <p className="truncate text-xs"> {product.name}</p>
+          <div className="flex flex-col gap-2 md:flex-row md:items-center">
             <p className="text-sm font-bold">
               {parseFloat(product.totalPrice.toFixed(2)).toLocaleString(
                 "pt-BR",
