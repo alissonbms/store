@@ -1,7 +1,7 @@
 "use client";
 
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useMemo, useState } from "react";
 
 export interface CartProduct extends ProductWithTotalPrice {
   quantity: number;
@@ -9,10 +9,10 @@ export interface CartProduct extends ProductWithTotalPrice {
 
 interface ICartContext {
   products: CartProduct[];
-  cartBasePrice: number;
-  cartTotalPrice: number;
-  cartTotalDiscount: number;
   cartTotalQuantity: number;
+  total: number;
+  subTotal: number;
+  totalDiscount: number;
   addProductToCart: (product: CartProduct) => void;
   increaseProductQuantity: (productId: string) => void;
   decreaseProductQuantity: (productId: string) => void;
@@ -21,10 +21,10 @@ interface ICartContext {
 
 export const CartContext = createContext<ICartContext>({
   products: [],
-  cartBasePrice: 0,
-  cartTotalPrice: 0,
-  cartTotalDiscount: 0,
   cartTotalQuantity: 0,
+  total: 0,
+  subTotal: 0,
+  totalDiscount: 0,
   addProductToCart: () => {},
   increaseProductQuantity: () => {},
   decreaseProductQuantity: () => {},
@@ -34,6 +34,24 @@ export const CartContext = createContext<ICartContext>({
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
   const [cartTotalQuantity, setCartTotalQuantity] = useState<number>(0);
+
+  const subTotal = useMemo(() => {
+    return products.reduce(
+      (accumulator, product) =>
+        accumulator + Number(product.basePrice) * product.quantity,
+      0,
+    );
+  }, [products]);
+
+  const total = useMemo(() => {
+    return products.reduce(
+      (accumulator, product) =>
+        accumulator + product.totalPrice * product.quantity,
+      0,
+    );
+  }, [products]);
+
+  const totalDiscount = subTotal - total;
 
   const addProductToCart = (product: CartProduct) => {
     const isProductAlreadyOnCart = products.some(
@@ -109,10 +127,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     <CartContext.Provider
       value={{
         products,
-        cartBasePrice: 0,
-        cartTotalPrice: 0,
-        cartTotalDiscount: 0,
         cartTotalQuantity,
+        total,
+        subTotal,
+        totalDiscount,
         addProductToCart,
         increaseProductQuantity,
         decreaseProductQuantity,

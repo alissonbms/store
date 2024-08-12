@@ -35,14 +35,37 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </p>
           {product.discountPercentage > 0 ? (
             <div className="flex items-center gap-2">
-              <p className="font-semibold">R${product.totalPrice.toFixed(2)}</p>
+              <p className="font-semibold">
+                {" "}
+                {parseFloat(product.totalPrice.toFixed(2)).toLocaleString(
+                  "pt-BR",
+                  {
+                    currency: "BRL",
+                    style: "currency",
+                    minimumFractionDigits: 2,
+                  },
+                )}{" "}
+              </p>
               <p className="text-xs line-through opacity-75">
-                R$ {Number(product.basePrice).toFixed(2)}
+                {parseFloat(
+                  Number(product.basePrice).toFixed(2),
+                ).toLocaleString("pt-BR", {
+                  currency: "BRL",
+                  style: "currency",
+                  minimumFractionDigits: 2,
+                })}{" "}
               </p>
             </div>
           ) : (
             <p className="font-semibold">
-              R$ {Number(product.basePrice).toFixed(2)}
+              {parseFloat(Number(product.basePrice).toFixed(2)).toLocaleString(
+                "pt-BR",
+                {
+                  currency: "BRL",
+                  style: "currency",
+                  minimumFractionDigits: 2,
+                },
+              )}{" "}
             </p>
           )}
         </div>

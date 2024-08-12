@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 import DiscountBadge from "@/components/ui/discount-badge";
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { CartContext, CartProduct } from "@/providers/cart";
-import { ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
+import { CartContext } from "@/providers/cart";
+import { Minus, Plus, TruckIcon } from "lucide-react";
 import { useContext, useState } from "react";
 
 interface ProductInfoProps {
@@ -34,7 +34,11 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
       <div className="flex items-center gap-2">
         <h1 className="text-xl font-bold">
-          R$ {product.totalPrice.toFixed(2)}
+          {parseFloat(product.totalPrice.toFixed(2)).toLocaleString("pt-BR", {
+            currency: "BRL",
+            style: "currency",
+            minimumFractionDigits: 2,
+          })}
         </h1>{" "}
         {product.discountPercentage > 0 && (
           <DiscountBadge>{product.discountPercentage}</DiscountBadge>
@@ -45,7 +49,14 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <div className="flex gap-1 text-sm opacity-75">
           De:{" "}
           <p className="line-through">
-            R$ {Number(product.basePrice).toFixed(2)}
+            {parseFloat(Number(product.basePrice).toFixed(2)).toLocaleString(
+              "pt-BR",
+              {
+                currency: "BRL",
+                style: "currency",
+                minimumFractionDigits: 2,
+              },
+            )}{" "}
           </p>
         </div>
       )}
@@ -56,7 +67,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           variant={"outline"}
           onClick={handleDecreaseQuantityClick}
         >
-          <ArrowLeftIcon size={16} />
+          <Minus size={16} />
         </Button>
         <span>{quantity}</span>
         <Button
@@ -64,7 +75,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           variant={"outline"}
           onClick={handleIncreaseQuantityClick}
         >
-          <ArrowRightIcon size={16} />
+          <Plus size={16} />
         </Button>
       </div>
 

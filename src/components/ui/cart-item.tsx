@@ -3,7 +3,7 @@
 import { CartContext, CartProduct } from "@/providers/cart";
 import Image from "next/image";
 import { Button } from "./button";
-import { ArrowLeftIcon, ArrowRightIcon, TrashIcon } from "lucide-react";
+import { Minus, Plus, TrashIcon } from "lucide-react";
 import { useContext } from "react";
 
 interface CartItemProps {
@@ -25,7 +25,7 @@ const CartItem = ({ product }: CartItemProps) => {
     increaseProductQuantity(product.id);
   };
 
-  const handleRemoveProductFromCart = () => {
+  const handleRemoveProductClick = () => {
     removeProductFromCart(product.id);
   };
 
@@ -46,11 +46,24 @@ const CartItem = ({ product }: CartItemProps) => {
           <p className="text-xs"> {product.name}</p>
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
-              R$ {product.totalPrice.toFixed(2)}
+              {parseFloat(product.totalPrice.toFixed(2)).toLocaleString(
+                "pt-BR",
+                {
+                  currency: "BRL",
+                  style: "currency",
+                  minimumFractionDigits: 2,
+                },
+              )}
             </p>
             {product.discountPercentage > 0 && (
               <p className="text-xs line-through opacity-75">
-                R$ {Number(product.basePrice).toFixed(2)}
+                {parseFloat(
+                  Number(product.basePrice).toFixed(2),
+                ).toLocaleString("pt-BR", {
+                  currency: "BRL",
+                  style: "currency",
+                  minimumFractionDigits: 2,
+                })}{" "}
               </p>
             )}
           </div>
@@ -61,7 +74,7 @@ const CartItem = ({ product }: CartItemProps) => {
               className="h-8 w-8"
               onClick={handleDecreaseQuantityClick}
             >
-              <ArrowLeftIcon size={16} />
+              <Minus size={16} />
             </Button>
             <span className="text-xs">{product.quantity}</span>
             <Button
@@ -70,7 +83,7 @@ const CartItem = ({ product }: CartItemProps) => {
               className="h-8 w-8"
               onClick={handleIncreaseQuantityClick}
             >
-              <ArrowRightIcon size={16} />
+              <Plus size={16} />
             </Button>
           </div>
         </div>
@@ -78,7 +91,7 @@ const CartItem = ({ product }: CartItemProps) => {
       <Button
         variant={"outline"}
         size="icon"
-        onClick={handleRemoveProductFromCart}
+        onClick={handleRemoveProductClick}
       >
         <TrashIcon size={16} />
       </Button>
