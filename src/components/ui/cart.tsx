@@ -33,17 +33,17 @@ const Cart = () => {
         Carrinho
       </Badge>
 
-      <ScrollArea className="h-full">
-        <div className="flex h-full flex-col gap-8">
-          {products.length > 0 ? (
-            products.map((product) => (
+      {products.length > 0 ? (
+        <ScrollArea className="h-full">
+          <div className="flex h-full flex-col gap-8">
+            {products.map((product) => (
               <CartItem key={product.id} product={product} />
-            ))
-          ) : (
-            <EmptyCart />
-          )}
-        </div>
-      </ScrollArea>
+            ))}
+          </div>
+        </ScrollArea>
+      ) : (
+        <EmptyCart />
+      )}
 
       {products.length > 0 && (
         <div className="flex flex-col gap-3">
