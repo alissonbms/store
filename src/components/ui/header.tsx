@@ -20,7 +20,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./sheet";
-import ModeToggle from "./mode-toggle";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
@@ -125,14 +124,9 @@ const Header = () => {
                     </Button>
                   </Link>
                 </SheetClose>
-
-                <ModeToggle />
               </div>
             </SheetContent>
           </Sheet>
-        </div>
-        <div className="hidden lg:block">
-          <ModeToggle />
         </div>
       </div>
 
