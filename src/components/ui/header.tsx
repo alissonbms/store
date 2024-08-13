@@ -154,7 +154,7 @@ const Header = () => {
           <SheetTitle>Menu carrinho de compras</SheetTitle>
         </SheetHeader>
 
-        <SheetContent>
+        <SheetContent className="w-[350px]">
           <Cart />
         </SheetContent>
       </Sheet>

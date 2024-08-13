@@ -30,11 +30,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
         </div>
 
         <div className="flex flex-col gap-1">
-          <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm">
-            {product.name}
-          </p>
+          <p className="truncate text-sm">{product.name}</p>
           {product.discountPercentage > 0 ? (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col gap-2 md:flex-row md:items-center">
               <p className="font-semibold">
                 {" "}
                 {parseFloat(product.totalPrice.toFixed(2)).toLocaleString(
