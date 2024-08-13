@@ -39,6 +39,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setProducts(
       JSON.parse(localStorage.getItem("@valeryianstore/cart-products") || "[]"),
     );
+
+    setCartTotalQuantity(
+      JSON.parse(localStorage.getItem("@valeryianstore/cart-quantity") || "0"),
+    );
   }, []);
 
   useEffect(() => {
@@ -47,6 +51,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       JSON.stringify(products),
     );
   }, [products]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "@valeryianstore/cart-quantity",
+      JSON.stringify(cartTotalQuantity),
+    );
+  }, [cartTotalQuantity]);
 
   const subTotal = useMemo(() => {
     return products.reduce(
