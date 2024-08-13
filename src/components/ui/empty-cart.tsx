@@ -10,7 +10,10 @@ export const EmptyCart = () => {
         <p className="text-center">
           Dê uma olhada nas nossas{" "}
           <SheetClose asChild>
-            <Link href="/deals" className="font-bold text-primary underline">
+            <Link
+              href="/category/deals/all"
+              className="font-bold text-primary underline"
+            >
               OFERTAS
             </Link>
           </SheetClose>

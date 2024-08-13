@@ -48,7 +48,9 @@ const ProductDetailsPage = async ({
       <ProductImages name={product.name} imageUrls={product.imageUrls} />
       <ProductInfo product={jsonProduct} />
       <div className="my-5">
-        <SectionTitle>Produtos Recomendados</SectionTitle>
+        <SectionTitle categorySlug={product.category.slug}>
+          Produtos Recomendados
+        </SectionTitle>
         <ProductList products={product.category.products} />
       </div>
     </div>

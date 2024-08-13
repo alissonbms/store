@@ -1,10 +1,15 @@
+import Link from "next/link";
 import { ComponentProps } from "react";
 
-const SectionTitle = ({ children, ...props }: ComponentProps<"p">) => {
+interface SectionTitleProps extends ComponentProps<"p"> {
+  categorySlug: string;
+}
+
+const SectionTitle = ({ children, categorySlug }: SectionTitleProps) => {
   return (
-    <p className="mb-4 pl-5 font-bold uppercase" {...props}>
-      {children}
-    </p>
+    <Link href={`/category/${categorySlug}`}>
+      <p className="mb-4 pl-5 font-bold uppercase">{children}</p>
+    </Link>
   );
 };
 

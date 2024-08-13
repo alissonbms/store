@@ -4,7 +4,11 @@ import { CATEGORY_ICON } from "@/constants/category-icon";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { prismaClient } from "@/lib/prisma";
 
-const CategoryProducts = async ({ params }: { params: { slug: string } }) => {
+const CategoryProductsPage = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
   const category = await prismaClient.category.findFirst({
     where: {
       slug: params.slug,
@@ -42,4 +46,4 @@ const CategoryProducts = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default CategoryProducts;
+export default CategoryProductsPage;
