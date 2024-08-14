@@ -52,6 +52,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
 
+  orders Order[]
+
   @@map("users")
 }
 
@@ -80,6 +82,36 @@ model Product {
   imageUrls          String[]
   basePrice          Decimal  @db.Decimal(8, 2)
   categoryId         String
-  category           Category @relation(fields: [categoryId], references: [id])
   discountPercentage Int      @default(0)
+  category           Category @relation(fields: [categoryId], references: [id])
+
+  orderProducts OrderProduct[]
+}
+
+model Order {
+  id            String         @id @default(uuid())
+  status        OrderStatus    @default(WAITING_FOR_PAYMENT)
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  orderProducts OrderProduct[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+enum OrderStatus {
+  WAITING_FOR_PAYMENT
+  PAYMENT_CONFIRMED
+}
+
+model OrderProduct {
+  id                 String  @id @default(uuid())
+  basePrice          Decimal @db.Decimal(8, 2)
+  discountPercentage Int     @default(0)
+  quantity           Int
+
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }
