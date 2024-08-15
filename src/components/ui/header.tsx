@@ -35,7 +35,7 @@ const Header = () => {
   const { cartTotalQuantity } = useContext(CartContext);
 
   return (
-    <Card className="flex items-center justify-between p-[1.875rem]">
+    <Card className="flex items-center justify-between rounded-none border-x-0 border-t-0 p-[1.875rem]">
       <div className="flex">
         <div className="flex lg:hidden">
           <Sheet>
@@ -146,8 +146,8 @@ const Header = () => {
             <div className="relative">
               <ShoppingCartIcon />
               {cartTotalQuantity > 0 && (
-                <div className="absolute -left-2.5 -top-2 rounded-full bg-primary px-1 text-xs">
-                  {cartTotalQuantity}
+                <div className="absolute -left-3 -top-2 w-4 rounded-full bg-primary px-1 text-xs">
+                  <p className="text-center">{cartTotalQuantity}</p>{" "}
                 </div>
               )}
             </div>

@@ -16,7 +16,7 @@ const CategoryItem = async ({ category }: CategoryItemProps) => {
             width={0}
             height={0}
             sizes="100vw"
-            className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain"
+            className="h-auto w-[7.5rem]"
           />
         </div>
         <div className="rounded-bl-lg rounded-br-lg bg-accent py-3">
