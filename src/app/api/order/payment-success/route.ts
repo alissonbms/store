@@ -22,20 +22,21 @@ export const POST = async (request: Request) => {
   );
 
   if (event.type === "checkout.session.completed") {
-    const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+    const session = event.data.object;
+    {
+      /* const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
       event.data.object.id,
       {
         expand: ["line_items"],
       },
     );
 
-    // const lineItems = sessionWithLineItems.line_items;
-
-    console.log(sessionWithLineItems?.metadata?.orderId);
+    const lineItems = sessionWithLineItems.line_items; */
+    }
 
     await prismaClient.order.update({
       where: {
-        id: sessionWithLineItems?.metadata?.orderId,
+        id: session?.metadata?.orderId,
       },
       data: {
         status: "PAYMENT_CONFIRMED",
