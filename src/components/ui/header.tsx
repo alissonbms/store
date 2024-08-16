@@ -6,6 +6,7 @@ import {
   LogInIcon,
   LogOutIcon,
   MenuIcon,
+  PackageSearchIcon,
   PercentIcon,
   ShoppingCartIcon,
 } from "lucide-react";
@@ -104,6 +105,20 @@ const Header = () => {
                     </Button>
                   </Link>
                 </SheetClose>
+
+                {status === "authenticated" && data?.user && (
+                  <SheetClose asChild>
+                    <Link href="/orders">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start gap-2"
+                      >
+                        <PackageSearchIcon size={18} />
+                        Meus pedidos
+                      </Button>
+                    </Link>
+                  </SheetClose>
+                )}
 
                 <SheetClose asChild>
                   <Link href="/category/deals/all">
