@@ -11,6 +11,7 @@ import { createCheckout } from "@/app/actions/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { signIn, useSession } from "next-auth/react";
 import { createOrder } from "@/app/actions/order";
+import BadgeTitle from "./badge-title";
 
 const Cart = () => {
   const { data } = useSession();
@@ -34,13 +35,10 @@ const Cart = () => {
 
   return (
     <div className="flex h-full flex-col gap-8">
-      <Badge
-        variant="outline"
-        className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem]"
-      >
+      <BadgeTitle>
         <ShoppingCartIcon size={18} />
         Carrinho
-      </Badge>
+      </BadgeTitle>
 
       {products.length > 0 ? (
         <ScrollArea className="h-full">
