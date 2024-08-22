@@ -6,14 +6,18 @@ import { CheckCircleIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const PurchaseSuccessPage = () => {
   const { clearCart } = useContext(CartContext);
+
+  useEffect(() => {
+    clearCart();
+  }, []);
+
   const router = useRouter();
 
   const handleButtonClick = (destination: string) => {
-    clearCart();
     router.push(destination);
   };
 
