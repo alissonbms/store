@@ -57,7 +57,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
         <AccordionItem value={order.id} className="border-0">
           <AccordionTrigger>
             <div className="flex flex-col gap-1 text-left">
-              <p>Pedido com: {totalQuantity} produto(s)</p>
+              <p className="font-bold uppercase">
+                Pedido com: {totalQuantity} produto(s)
+              </p>
               <div className="flex items-center gap-1 text-sm opacity-60">
                 <span>
                   Feito em {format(order.createdAt, "d/MM/y 'às' HH:mm")}
@@ -75,7 +77,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
                   {order.status === "PAYMENT_CONFIRMED" ? (
                     <p className="font-bold text-green-500">Pago</p>
                   ) : (
-                    <p className="font-bold text-yellow-600">Aguardando..</p>
+                    <p className="font-bold text-yellow-600">Pendente</p>
                   )}
                 </div>
 
@@ -89,8 +91,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
                 <div className="flex flex-col gap-1">
                   <p className="font-bold uppercase">Pagamento</p>
                   {order.status === "PAYMENT_CONFIRMED" ? (
-                    <div className="flex flex-row items-center gap-1 opacity-65">
-                      <span>Cartão</span> <CreditCardIcon />
+                    <div className="flex flex-row items-center gap-1">
+                      <span className="text-green-500">Cartão</span>{" "}
+                      <CreditCardIcon fill="#22c55e" color="#0A0A0A" />
                     </div>
                   ) : (
                     <p className="font-bold text-yellow-600">Aguardando..</p>
