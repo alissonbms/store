@@ -12,7 +12,7 @@ interface OrderProductItemProps {
 const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
   return (
     <div className="flex flex-row items-center gap-4">
-      <div className="flex h-[77px] w-[77px] items-center justify-center rounded-lg bg-accent">
+      <div className="flex h-[77px] w-[100px] items-center justify-center rounded-lg bg-accent">
         <Image
           src={orderProduct.product.imageUrls[0]}
           height={0}
@@ -24,8 +24,8 @@ const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
       </div>
       <div className="flex w-full flex-col gap-2">
         <div className="flex w-fit items-center rounded-md bg-accent px-3 py-[2px]">
-          <p className="text-[12px]">
-            Vendido e entre por{" "}
+          <p className="text-center text-xs">
+            Vendido e entregue por{" "}
             <span className="font-bold">Valeryian Store</span>
           </p>
         </div>

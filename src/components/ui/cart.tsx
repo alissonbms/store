@@ -53,7 +53,7 @@ const Cart = () => {
       )}
 
       {products.length > 0 && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 text-sm">
           <CartDetails title={"Subtotal:"} value={subTotal} />
           <CartDetails title={"Entrega:"} text={"GRÁTIS"} type={"shipment"} />
           <CartDetails
@@ -61,9 +61,12 @@ const Cart = () => {
             value={totalDiscount}
             type={"discount"}
           />
-          <div className="text-2xl">
-            <CartDetails title={"Total:"} value={total} type="total" />
-          </div>
+          <CartDetails
+            title={"Total:"}
+            value={total}
+            type="total"
+            className="text-base font-bold"
+          />
 
           <Button
             className="mt-6 rounded-lg uppercase"

@@ -161,7 +161,7 @@ const Header = () => {
             <div className="relative">
               <ShoppingCartIcon />
               {cartTotalQuantity > 0 && (
-                <div className="absolute -left-3 -top-2 w-4 rounded-full bg-primary px-1 text-xs">
+                <div className="absolute -left-3.5 -top-3.5 w-fit rounded-full bg-primary px-1.5 text-xs">
                   <p className="text-center">{cartTotalQuantity}</p>{" "}
                 </div>
               )}

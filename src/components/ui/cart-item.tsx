@@ -30,7 +30,7 @@ const CartItem = ({ product }: CartItemProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between pr-3">
       <div className="flex items-center gap-3">
         <div className="flex min-h-[5.625rem] w-[77px] items-center justify-center bg-accent">
           <Image
