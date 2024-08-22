@@ -1,4 +1,4 @@
-import { Order, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { format } from "date-fns";
 
 import { Card } from "./card";
@@ -9,11 +9,17 @@ import {
   AccordionTrigger,
 } from "./accordion";
 import { CreditCardIcon } from "lucide-react";
+import OrderProductItem from "./order-product-item";
+import { Separator } from "./separator";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
     include: {
-      orderProducts: true;
+      orderProducts: {
+        include: {
+          product: true;
+        };
+      };
     };
   }>;
 }
@@ -30,7 +36,8 @@ const OrderItem = ({ order }: OrderItemProps) => {
           </AccordionTrigger>
 
           <AccordionContent>
-            <div className="flex flex-col gap-3">
+            <Separator />
+            <div className="mt-4 flex flex-col gap-4">
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-col gap-1">
                   <p className="font-bold uppercase">Status</p>
@@ -55,13 +62,18 @@ const OrderItem = ({ order }: OrderItemProps) => {
                   </div>
                 </div>
               </div>
+              <Separator />
+              <div className="flex flex-col gap-7">
+                {order.orderProducts.map((orderProduct) => (
+                  <OrderProductItem
+                    key={orderProduct.id}
+                    orderProduct={orderProduct}
+                  />
+                ))}
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>
-
-        {/* <AccordionItem value="aaa">
-          <AccordionTrigger>aaa</AccordionTrigger>
-        </AccordionItem>*/}
       </Accordion>
     </Card>
   );
