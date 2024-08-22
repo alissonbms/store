@@ -108,7 +108,7 @@ const Header = () => {
 
                 {status === "authenticated" && data?.user && (
                   <SheetClose asChild>
-                    <Link href="/orders">
+                    <Link href="/orders/dialog">
                       <Button
                         variant="outline"
                         className="w-full justify-start gap-2"

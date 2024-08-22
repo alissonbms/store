@@ -52,7 +52,7 @@ const PurchaseSuccessPage = () => {
               <h2 className="text-[1.1rem] font-semibold">Página Inicial</h2>
             </Button>
             <Button
-              onClick={() => handleButtonClick("/orders")}
+              onClick={() => handleButtonClick("/orders/dialog")}
               className="border border-solid border-[#DC2626] hover:bg-[#0A0A0A]"
             >
               <h2 className="text-[1.1rem] font-semibold">Verificar pedidos</h2>

@@ -3,10 +3,23 @@
 import { DialogHeader } from "@/components/ui/dialog";
 import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 import { FileWarningIcon, X } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const OrderDialog = () => {
+const OrdersDialogPage = () => {
   const [open, setOpen] = useState(true);
+  const { status } = useSession();
+  const router = useRouter();
+
+  if (status === "unauthenticated") {
+    return router.push("/");
+  }
+
+  const handleCloseClick = () => {
+    setOpen(false);
+    router.push("/orders");
+  };
 
   return (
     <div className="flex h-full w-full items-center justify-center p-10">
@@ -19,7 +32,7 @@ const OrderDialog = () => {
             <X
               className="cursor-pointer"
               size={24}
-              onClick={() => setOpen(false)}
+              onClick={() => handleCloseClick()}
               color={"#DC2626"}
             />
           </DialogHeader>
@@ -33,7 +46,7 @@ const OrderDialog = () => {
             <p>
               Aqui, portanto, você pode pagá-los ou simplesmente excluí-los.
               <span className="mt-2 block font-bold">
-                Obs: todos os pedidos são excluídos pós 24h da criação do mesmo.
+                Obs: todos os pedidos são excluídos periodicamente.
               </span>
             </p>
           </div>
@@ -43,4 +56,4 @@ const OrderDialog = () => {
   );
 };
 
-export default OrderDialog;
+export default OrdersDialogPage;
