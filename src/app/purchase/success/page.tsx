@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { CartContext } from "@/providers/cart";
 import { CheckCircleIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
@@ -16,6 +16,12 @@ const PurchaseSuccessPage = () => {
     clearCart();
     router.push(destination);
   };
+
+  const { status } = useSession();
+
+  if (status === "unauthenticated") {
+    return router.push("/");
+  }
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-12 lg:flex-row">
@@ -42,7 +48,7 @@ const PurchaseSuccessPage = () => {
               <h2 className="text-[1.1rem] font-semibold">Página Inicial</h2>
             </Button>
             <Button
-              onClick={() => handleButtonClick("/catalog")}
+              onClick={() => handleButtonClick("/orders")}
               className="border border-solid border-[#DC2626] hover:bg-[#0A0A0A]"
             >
               <h2 className="text-[1.1rem] font-semibold">Verificar pedidos</h2>
