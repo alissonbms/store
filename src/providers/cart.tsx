@@ -150,6 +150,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearCart = () => {
+    localStorage.removeItem("@valeryianstore/cart-products");
+    localStorage.removeItem("@valeryianstore/cart-quantity");
     setCartTotalQuantity(0);
     setProducts([]);
   };
